@@ -1,51 +1,51 @@
 const express = require('express');
 
-const ProductController = require('./controllers/ProductController');
-const OrderController = require('./controllers/OrderController');
-const ItemController = require('./controllers/ItemController');
-const CustomerController = require('./controllers/CustomerController');
-const EmployeeController = require('./controllers/EmployeeController');
+const BookController = require('./controllers/BookController');
+const LoanController = require('./controllers/LoanController');
+const LoanBookController = require('./controllers/LoanBookController');
+const UserController = require('./controllers/UserController');
+const SessionController = require('./controllers/SessionController');
 
 const routes = express.Router();
 
-routes.post('/orders', OrderController.store);
-routes.get('/orders', OrderController.index);
-routes.get('/orders/:id', OrderController.indexOne);
-routes.delete('/orders/', OrderController.delete);
-routes.delete('/orders/:id', OrderController.deleteOne);
-routes.put('/orders/', OrderController.update);
-routes.put('/orders/:id', OrderController.updateOne);
+routes.post('/loan', LoanController.store);
+routes.get('/loan', LoanController.index);
+routes.get('/loan/:id', LoanController.indexOne);
+routes.delete('/loan/', LoanController.delete);
+routes.delete('/loan/:id', LoanController.deleteOne);
+routes.put('/loan/', LoanController.update);
+routes.put('/loan/:id', LoanController.updateOne);
 
-routes.post('/products', ProductController.store);
-routes.get('/products', ProductController.index);
-routes.get('/products/:id', ProductController.indexOne);
-routes.delete('/products/', ProductController.delete);
-routes.delete('/products/:id', ProductController.deleteOne);
-routes.put('/products/', ProductController.update);
-routes.put('/products/:id', ProductController.updateOne);
+routes.post('/book', BookController.store);
+routes.get('/book', BookController.index);
+routes.get('/book/:id', BookController.indexOne);
+routes.delete('/book/', BookController.delete);
+routes.delete('/book/:id', BookController.deleteOne);
+routes.put('/book/', BookController.update);
+routes.put('/book/:id', BookController.updateOne);
 
-routes.post('/customers', CustomerController.store);
-routes.get('/customers', CustomerController.index);
-routes.get('/customers/:id', CustomerController.indexOne);
-routes.delete('/customers/', CustomerController.delete);
-routes.delete('/customers/:id', CustomerController.deleteOne);
-routes.put('/customers/', CustomerController.update);
-routes.put('/customers/:id', CustomerController.updateOne);
+routes.post('/user', UserController.store);
+routes.get('/user', UserController.index);
+routes.get('/user/:id', UserController.indexOne);
+routes.delete('/user/', UserController.delete);
+routes.delete('/user/:id', UserController.deleteOne);
+routes.put('/user/', UserController.update);
+routes.put('/user/:id', UserController.updateOne);
 
-routes.post('/orders/:order_id/items/:id', ItemController.store);
-routes.get('/items', ItemController.index);
-routes.get('/items/:id', ItemController.indexOne);
-routes.delete('/items/', ItemController.delete);
-routes.delete('/orders/:order_id/items/:id', ItemController.deleteOne);
-routes.put('/items/', ItemController.update);
-routes.put('/orders/:order_id/items/:id', ItemController.updateOne);
+routes.post('/orders/:order_id/loan_book/:id', LoanBookController.store);
+routes.get('/loan_book', LoanBookController.index);
+routes.get('/loan_book/:id', LoanBookController.indexOne);
+routes.delete('/loan_book/', LoanBookController.delete);
+routes.delete('/orders/:order_id/loan_book/:id', LoanBookController.deleteOne);
+routes.put('/loan_book/', LoanBookController.update);
+routes.put('/orders/:order_id/loan_book/:id', LoanBookController.updateOne);
 
-routes.post('/employees', EmployeeController.store);
-routes.get('/employees', EmployeeController.index);
-routes.get('/employees/:id', EmployeeController.indexOne);
-routes.delete('/employees/', EmployeeController.delete);
-routes.delete('/employees/:id', EmployeeController.deleteOne);
-routes.put('/employees/', EmployeeController.update);
-routes.put('/employees/:id', EmployeeController.updateOne);
+routes.post('/session', SessionController.store);
+routes.get('/session', SessionController.index);
+routes.get('/session/:id', SessionController.indexOne);
+routes.delete('/session/', SessionController.delete);
+routes.delete('/session/:id', SessionController.deleteOne);
+routes.put('/session/', SessionController.update);
+routes.put('/session/:id', SessionController.updateOne);
 
 module.exports = routes;
