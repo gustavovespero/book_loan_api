@@ -1,38 +1,38 @@
-const Book = require('../models/Book');
+const User = require('../models/User');
 
 module.exports = {
     async index(req,res){
-        const books = await Book.findAll().catch((e) => {
+        const users = await User.findAll().catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.status(200).json(books);
+        return res.status(200).json(users);
     },
 
     async indexOne(req,res){
         const { id } = req.params;
 
-        const book = await Book.findByPk(id).catch((e) => {
+        const user = await User.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!book){
+        if(!user){
             res.status(404).json({
-                error: `Book with id = ${id} does not exists`
+                error: `User with id = ${id} does not exists`
             })
         };
 
-        return res.status(200).json(book);
+        return res.status(200).json(user);
     },
 
     async store(req, res){
-        const { name, author, price, description } = req.body;
+        const { name, birth_date } = req.body;
 
-        const book = await Book.create({ name, author, price, description }).catch((e) => {
+        const user = await User.create({ name, birth_date }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return book.json(books);
+        return user.json(user);
     },
     
     async delete(req, res){
@@ -41,14 +41,14 @@ module.exports = {
     
     async deleteOne(req, res){
         const { id } = req.params;
-        const book = await Book.findByPk(id).catch((e) => {
+        const user = await User.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!book){
-            return res.status(404).json({ error: `Book with id = ${id} does not exists.` })
+        if(!user){
+            return res.status(404).json({ error: `User with id = ${id} does not exists.` })
         }else{
-            await Book.destroy({
+            await User.destroy({
                 where: { 
                     id: id
                 }
@@ -75,14 +75,14 @@ module.exports = {
     async updateOne(req, res){
         const id = req.params.id;
 
-        const book = await Book.findByPk(id).catch((e) => {
+        const user = await User.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!book){
-            return res.status(404).json({ error: `Book with id=${id} does not exists.` })
+        if(!user){
+            return res.status(404).json({ error: `User with id=${id} does not exists.` })
         }else{
-            await Book.update(req.body, {
+            await User.update(req.body, {
                 where: { id: id }
             })
             .then((num) => {
