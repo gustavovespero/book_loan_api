@@ -12,32 +12,33 @@ module.exports = {
     async indexOne(req,res){
         const { id } = req.params;
 
-        const books = await Book.findByPk(id).catch((e) => {
+        const book = await Book.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!books){
+        if(!book){
             res.status(404).json({
-                error: "Product does not exists"
+                error: `Book with id = ${id} does not exists`
             })
         };
 
-        return res.status(200).json(books);
+        return res.status(200).json(book);
     },
 
     async store(req, res){
-        const { name, price, description } = req.body;
+        const { name, author, price, description } = req.body;
 
-        const books = await Book.create({ name, price, description }).catch((e) => {
+        const book = await Book.create({ name, author, price, description }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.json(books);
+        return book.json(books);
     },
     
     async delete(req, res){
         return res.status(405).json({ error: 'Method not allowed' });
     },
+    
     async deleteOne(req, res){
         const { id } = req.params;
         const book = await Book.findByPk(id).catch((e) => {
