@@ -19,7 +19,8 @@ const Book = database.define('book',{
         allowNull: false
     },
     price: DataTypes.DECIMAL,
-    description: DataTypes.STRING
+    description: DataTypes.STRING,
+    freezeTableName: true
 })
 
 Book.belongsToMany(Loan,{
