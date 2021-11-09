@@ -1,6 +1,7 @@
 const DataTypes = require('sequelize');
 const database = require('../database');
 const Loan_Book = require('./Loan_Book');
+const Session = require('./Session');
 const Loan = require('./Loan');
 
 const Book = database.define('book',{
@@ -21,6 +22,11 @@ const Book = database.define('book',{
     price: DataTypes.DECIMAL,
     description: DataTypes.STRING,
     freezeTableName: true
+})
+
+Book.belongsTo(Session,{
+    constraint: true,
+    foreignKey: 'user_id'
 })
 
 Book.belongsToMany(Loan,{
