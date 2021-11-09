@@ -1,38 +1,38 @@
-const User = require('../models/User');
+const Session = require('../models/Session');
 
 module.exports = {
     async index(req,res){
-        const users = await User.findAll().catch((e) => {
+        const sessions = await Session.findAll().catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.status(200).json(users);
+        return res.status(200).json(sessions);
     },
 
     async indexOne(req,res){
         const { id } = req.params;
 
-        const user = await User.findByPk(id).catch((e) => {
+        const session = await Session.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!user){
+        if(!session){
             res.status(404).json({
-                error: `User with id = ${id} does not exists`
+                error: `Session with id = ${id} does not exists`
             })
         };
 
-        return res.status(200).json(user);
+        return res.status(200).json(session);
     },
 
     async store(req, res){
-        const { name, birth_date } = req.body;
+        const { name, author, price, description } = req.body;
 
-        const user = await User.create({ name, birth_date }).catch((e) => {
+        const session = await Session.create({ name, author, price, description }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.status(200).json(user);
+        return res.status(200).json(session);
     },
     
     async delete(req, res){
@@ -41,14 +41,14 @@ module.exports = {
     
     async deleteOne(req, res){
         const { id } = req.params;
-        const user = await User.findByPk(id).catch((e) => {
+        const session = await Session.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!user){
-            return res.status(404).json({ error: `User with id = ${id} does not exists.` })
+        if(!session){
+            return res.status(404).json({ error: `Session with id = ${id} does not exists.` })
         }else{
-            await User.destroy({
+            await Session.destroy({
                 where: { 
                     id: id
                 }
@@ -75,14 +75,14 @@ module.exports = {
     async updateOne(req, res){
         const id = req.params.id;
 
-        const user = await User.findByPk(id).catch((e) => {
+        const session = await Session.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!user){
-            return res.status(404).json({ error: `User with id=${id} does not exists.` })
+        if(!session){
+            return res.status(404).json({ error: `Session with id=${id} does not exists.` })
         }else{
-            await User.update(req.body, {
+            await Session.update(req.body, {
                 where: { id: id }
             })
             .then((num) => {
