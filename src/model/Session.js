@@ -12,8 +12,8 @@ const Session = database.define('session', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    description: DataTypes.STRING,
-    freezeTableName: true
+    description: DataTypes.STRING
+    //freezeTableName: true
 })
 
 module.exports = Session;

@@ -8,11 +8,11 @@ const Loan = database.define('loan',{
         autoIncrement: true,
         allowNull: false,
         primaryKey: true
-    },
-    freezeTableName: true
+    }
+    //freezeTableName: true
 })
 
-Order.belongsTo(User,{
+Loan.belongsTo(User,{
     constraint: true,
     foreignKey: 'user_id'
 })

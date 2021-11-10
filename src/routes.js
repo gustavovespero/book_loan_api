@@ -1,10 +1,10 @@
 const express = require('express');
 
-const BookController = require('./controllers/BookController');
-const LoanController = require('./controllers/LoanController');
-const LoanBookController = require('./controllers/LoanBookController');
-const UserController = require('./controllers/UserController');
-const SessionController = require('./controllers/SessionController');
+const BookController = require('./controller/BookController');
+const LoanController = require('./controller/LoanController');
+const LoanBookController = require('./controller/LoanBookController');
+const UserController = require('./controller/UserController');
+const SessionController = require('./controller/SessionController');
 
 const routes = express.Router();
 

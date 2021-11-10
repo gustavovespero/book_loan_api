@@ -1,4 +1,4 @@
-const Session = require('../models/Session');
+const Session = require('../model/Session');
 
 module.exports = {
     async index(req,res){

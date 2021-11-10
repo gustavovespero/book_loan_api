@@ -12,8 +12,8 @@ const User = database.define('user',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    birth_date: DataTypes.DATEONLY,
-    freezeTableName: true
+    birth_date: DataTypes.DATEONLY
+    //freezeTableName: true
 })
 
 module.exports = User;

@@ -20,8 +20,8 @@ const Book = database.define('book',{
         allowNull: false
     },
     price: DataTypes.DECIMAL,
-    description: DataTypes.STRING,
-    freezeTableName: true
+    description: DataTypes.STRING
+    //freezeTableName: true
 })
 
 Book.belongsTo(Session,{

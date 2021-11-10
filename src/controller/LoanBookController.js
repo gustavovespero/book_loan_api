@@ -1,5 +1,5 @@
-const Loan = require('../models/Loan');
-const Loan_Book = require('../models/Loan_Book');
+const Loan = require('../model/Loan');
+const Loan_Book = require('../model/Loan_Book');
 
 module.exports = {
     async index(req,res){

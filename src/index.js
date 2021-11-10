@@ -1,11 +1,11 @@
 (async () => {
     const database = require('./database');
 
-    const Product = require('./models/Product');
-    const Customer = require('./models/Customer');
-    const Employee = require('./models/Employee');
-    const Order = require('./models/Employee');
-    const Item = require('./models/Item');
+    const Loan = require('./model/Loan');
+    const User = require('./model/User');
+    const Book = require('./model/Book');
+    const Session = require('./model/Session');
+    const Loan_Book = require('./model/Loan_Book');
 
     await database.sync();
 

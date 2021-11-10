@@ -1,7 +1,7 @@
-const User = require('../models/User');
-const Session = require('../models/Session');
-const Loan = require('../models/Loan');
-const Book = require('../models/Book');
+const User = require('../model/User');
+const Session = require('../model/Session');
+const Loan = require('../model/Loan');
+const Book = require('../model/Book');
 
 module.exports = {
     async index(req,res){

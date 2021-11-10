@@ -7,8 +7,8 @@ const Loan_Book = database.define('loan_book',{
         autoIncrement: false,
         allowNull: false,
         primaryKey: true
-    },
-    freezeTableName: true
+    }
+    //freezeTableName: true
 })
 
 module.exports = Loan_Book;
