@@ -1,5 +1,33 @@
 <script>
-    footer = require('./includes/footer.html')
+
+  var table_body = document.querySelector("tbody");
+  
+  async function fetchAsync (url) {
+    let response = await fetch(url);
+    return response.json();
+  }
+
+  function BookList () {
+      this.createRow = function () {
+        
+        var data = fetchAsync('http://127.0.0.1:3000/book');
+        //console.log(data);
+        var list = Object.keys(data).map(i => JSON.parse(data[Number(i)]));
+        console.log(data);
+
+       document.getElementById("book_list").innerHTML = `<tr>
+                                                            <td>oioioioi</td>
+                                                            <td>oioioioi</td>
+                                                            <td>oioioioi</td>
+                                                         </tr>`;
+      }        
+  };
+
+
+  function addBookList(event) {
+      book_list = new BookList();
+      book_list.createRow();
+  }
 </script>
 
 <!DOCTYPE html>
@@ -7,14 +35,15 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" http-equiv="x-ua-compatible" content="width=device-width,initial-scale=1.0">
     <title>Loan App</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Compiled and minified JavaScript -->
+    <!-- <link rel="stylesheet" href="css/style.css">    content="width=device-width-->
+    <!-- Compiled and minified JavaScript  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
     <section class = "container">
@@ -22,30 +51,37 @@
         <p>Trabalho da disciplina de Laboratório de Banco de Dados.</p>
         <p>Professora: Vanessa Borges.</p>
         <p>Aluno: Gustavo Victor Vespero Ojeda.</p>
-        
+        <br>
+        <div id="test"></div>
+        <br>
+        <div>
+          <table>
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Autor</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody id="book_list">
+              <script>addBookList()</script>
+            </tbody>
+        </table>
+        </div>
+        <br>
     </section>
-    <footer class="page-footer">
+    <footer class="page-footer" style="position:fixed;bottom:0;left:0;width:100%;">
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
-              <h5 class="white-text">Footer Content</h5>
-              <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-              <h5 class="white-text">Links</h5>
-              <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-              </ul>
+              <h5 class="white-text"></h5>
+              <p class="grey-text text-lighten-4"></p>
             </div>
           </div>
         </div>
         <div class="footer-copyright black">
           <div class="container">
-          © 2014 Copyright Text
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+          © 2021 Copyright
           </div>
         </div>
       </footer>

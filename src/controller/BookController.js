@@ -2,6 +2,8 @@ const Book = require('../model/Book');
 
 module.exports = {
     async index(req,res){
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
         const books = await Book.findAll().catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
