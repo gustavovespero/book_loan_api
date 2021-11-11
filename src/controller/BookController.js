@@ -26,13 +26,13 @@ module.exports = {
     },
 
     async store(req, res){
-        const { name, author, price, description } = req.body;
+        const { name, author, price, description, session_id } = req.body;
 
-        const book = await Book.create({ name, author, price, description }).catch((e) => {
+        const book = await Book.create({ name, author, price, description, session_id }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.status(200).json(books);
+        return res.status(200).json(book);
     },
     
     async delete(req, res){

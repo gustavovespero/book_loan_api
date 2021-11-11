@@ -26,7 +26,7 @@ const Book = database.define('book',{
 
 Book.belongsTo(Session,{
     constraint: true,
-    foreignKey: 'user_id'
+    foreignKey: 'session_id'
 })
 
 Book.belongsToMany(Loan,{

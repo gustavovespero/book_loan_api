@@ -4,6 +4,8 @@ const path = require('path');
 const router = express.Router();
 const app = express();
 
+require('./index.js');
+
 __dirname = 'view';
 
 router.get('/',function(req,res){
