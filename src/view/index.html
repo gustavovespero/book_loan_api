@@ -3,23 +3,21 @@
   var table_body = document.querySelector("tbody");
   
   async function fetchAsync (url) {
-    let response = await fetch(url);
+    let response = await fetch(url, { method: 'GET' });
     return response.json();
   }
 
   function BookList () {
       this.createRow = function () {
-        
         var data = fetchAsync('http://127.0.0.1:3000/book');
-        //console.log(data);
         var list = Object.keys(data).map(i => JSON.parse(data[Number(i)]));
         console.log(data);
 
-       document.getElementById("book_list").innerHTML = `<tr>
+        document.getElementById("book_list").innerHTML = `<tr>
                                                             <td>oioioioi</td>
                                                             <td>oioioioi</td>
                                                             <td>oioioioi</td>
-                                                         </tr>`;
+                                                          </tr>`;
       }        
   };
 
