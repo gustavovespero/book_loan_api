@@ -32,7 +32,7 @@ module.exports = {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.status(200).json(books);
+        return res.status(200).json(book);
     },
     
     async delete(req, res){
