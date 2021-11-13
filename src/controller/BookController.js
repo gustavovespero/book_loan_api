@@ -2,6 +2,9 @@ const Book = require('../model/Book');
 
 module.exports = {
     async index(req,res){
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+        
         const books = await Book.findAll().catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
@@ -26,9 +29,9 @@ module.exports = {
     },
 
     async store(req, res){
-        const { name, author, price, description } = req.body;
+        const { name, author, price, description, session_id } = req.body;
 
-        const book = await Book.create({ name, author, price, description }).catch((e) => {
+        const book = await Book.create({ name, author, price, description, session_id }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 

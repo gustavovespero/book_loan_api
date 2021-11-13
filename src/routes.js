@@ -32,13 +32,13 @@ routes.delete('/user/:id', UserController.deleteOne);
 routes.put('/user/', UserController.update);
 routes.put('/user/:id', UserController.updateOne);
 
-routes.post('/orders/:order_id/loan_book/:id', LoanBookController.store);
+routes.post('/loan/:loan_id/loan_book/:id', LoanBookController.store);
 routes.get('/loan_book', LoanBookController.index);
 routes.get('/loan_book/:id', LoanBookController.indexOne);
 routes.delete('/loan_book/', LoanBookController.delete);
-routes.delete('/orders/:order_id/loan_book/:id', LoanBookController.deleteOne);
+routes.delete('/loan/:order_id/loan_book/:id', LoanBookController.deleteOne);
 routes.put('/loan_book/', LoanBookController.update);
-routes.put('/orders/:order_id/loan_book/:id', LoanBookController.updateOne);
+routes.put('/loan/:loan_id/loan_book/:id', LoanBookController.updateOne);
 
 routes.post('/session', SessionController.store);
 routes.get('/session', SessionController.index);

@@ -17,24 +17,23 @@ module.exports = {
 
     async store(req, res){
         var { loan_id, id } = req.params;
-        const { quantity, product_id } = req.body;
+        const { book_id } = req.body;
 
         const loan = await Loan.findByPk(loan_id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
         if(!loan){
-            return res.status(404).json({ error: 'Loan not found' });
+            return res.status(404).json({ error: `Loan with id ${loan_id} not found` });
         }
         
-        id = `O${loan_id}I${id}`;
+        id = `L${loan_id}I${id}`;
 
         const loan_book = await Loan_Book.create({ 
             id,
             loan_id,
-            product_id, 
-            quantity 
-        }).catch((e) => {
+            book_id
+            }).catch((e) => {
             return res.status(400).json({ error: "Creating failed with message: " + e });
         });;
 
@@ -48,7 +47,7 @@ module.exports = {
         const { loan_id } = req.params;
         const { id } = req.params;
 
-        const loan_book_id = `O${loan_id}I${id}`;
+        const loan_book_id = `L${loan_id}I${id}`;
 
         const loan = await Loan.findByPk(loan_id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
