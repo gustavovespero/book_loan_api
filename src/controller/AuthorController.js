@@ -1,59 +1,38 @@
-const Book = require('../model/Book');
 const Author = require('../model/Author');
-const Session = require('../model/Session');
 
 module.exports = {
     async index(req,res){
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
-        
-        /*const books = await Book.findAll().catch((e) => {
-            return res.status(400).json({ error: "Failed with message: " + e });
-        });*/
-
-        const books = await Book.findAll({ 
-            include: [
-                Author,
-                Session
-            ]}).catch((e) => {
-                return res.status(400).json({ error: "Failed with message: " + e });
-            });
-
-        return res.status(200).json(books);
-    },
-
-    async indexOne(req,res){
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "X-Requested-With");
-
-        const { id } = req.params;
-
-        const book = await Book.findByPk(id, { 
-            include: [
-                Author,
-                Session
-            ]}).catch((e) => {
-                return res.status(400).json({ error: "Failed with message: " + e });
-            });
-
-        if(!book){
-            res.status(404).json({
-                error: `Book with id = ${id} does not exists`
-            })
-        };
-
-        return res.status(200).json(book);
-    },
-
-    async store(req, res){
-
-        const { name, author, price, description, session_id } = req.body;
-
-        const book = await Book.create({ name, author, price, description, session_id }).catch((e) => {
+        const authors = await Author.findAll().catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        return res.status(200).json(book);
+        return res.status(200).json(authors);
+    },
+
+    async indexOne(req,res){
+        const { id } = req.params;
+
+        const author = await Author.findByPk(id).catch((e) => {
+            return res.status(400).json({ error: "Failed with message: " + e });
+        });
+
+        if(!author){
+            res.status(404).json({
+                error: `author with id = ${id} does not exists`
+            })
+        };
+
+        return res.status(200).json(author);
+    },
+
+    async store(req, res){
+        const { name, description } = req.body;
+
+        const author = await Author.create({ name, description }).catch((e) => {
+            return res.status(400).json({ error: "Failed with message: " + e });
+        });
+
+        return res.status(200).json(author);
     },
     
     async delete(req, res){
@@ -62,14 +41,14 @@ module.exports = {
     
     async deleteOne(req, res){
         const { id } = req.params;
-        const book = await Book.findByPk(id).catch((e) => {
+        const author = await Author.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!book){
-            return res.status(404).json({ error: `Book with id = ${id} does not exists.` })
+        if(!author){
+            return res.status(404).json({ error: `author with id = ${id} does not exists.` })
         }else{
-            await Book.destroy({
+            await Author.destroy({
                 where: { 
                     id: id
                 }
@@ -96,14 +75,14 @@ module.exports = {
     async updateOne(req, res){
         const id = req.params.id;
 
-        const book = await Book.findByPk(id).catch((e) => {
+        const author = await Author.findByPk(id).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!book){
-            return res.status(404).json({ error: `Book with id=${id} does not exists.` })
+        if(!author){
+            return res.status(404).json({ error: `author with id=${id} does not exists.` })
         }else{
-            await Book.update(req.body, {
+            await Author.update(req.body, {
                 where: { id: id }
             })
             .then((num) => {

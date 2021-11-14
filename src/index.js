@@ -5,6 +5,8 @@
     const User = require('./model/User');
     const Book = require('./model/Book');
     const Session = require('./model/Session');
+    const Author = require('./model/Session');
+    const Book_Author = require('./model/Session');
     const Loan_Book = require('./model/Loan_Book');
 
     await database.sync();

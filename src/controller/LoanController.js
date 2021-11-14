@@ -12,6 +12,20 @@ module.exports = {
         return res.status(200).json(loans);
     },
 
+    async indexByUserId(req,res){
+        const id = req.body.id;
+
+        const loans = await Loan.findAll({
+            where: { 
+                user_id: id,
+            }
+        }).catch((e) => {
+            return res.status(400).json({ error: "Failed with message: " + e });
+        });
+
+        return res.status(200).json(loans);
+    },
+
     async indexOne(req,res){
         const { id } = req.params;
 

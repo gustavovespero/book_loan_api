@@ -1,9 +1,8 @@
 const DataTypes = require('sequelize');
 const database = require('../database');
-const Book = require('./Book');
 
-const Session = database.define('session', {
-    id: {
+const Person = database.define('person',{
+    cpf: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
@@ -13,10 +12,8 @@ const Session = database.define('session', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    description: DataTypes.STRING
+    birth_date: DataTypes.DATEONLY
     //freezeTableName: true
 })
 
-//Book.belongsTo(Session, {foreignKey: 'session_id', targetKey: 'book_id'});
-
-module.exports = Session;
+module.exports = Person;

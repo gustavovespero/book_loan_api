@@ -1,34 +1,72 @@
 const User = require('../model/User');
+const Person = require('../model/Person');
 
 module.exports = {
     async index(req,res){
-        const users = await User.findAll().catch((e) => {
+        /*const users = await User.findAll().catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
+        });*/
+
+        const users = await User.findAll({ 
+            include: [
+                Person
+            ]}).catch((e) => {
+                return res.status(400).json({ error: "Failed with message: " + e });
         });
 
         return res.status(200).json(users);
     },
 
     async indexOne(req,res){
-        const { id } = req.params;
+        const { login } = req.body;
 
-        const user = await User.findByPk(id).catch((e) => {
+        const user = await User.findAll({
+            where: { 
+                login: login,
+            }
+        }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!user){
+        if(!user || user.length < 1 ){
             res.status(404).json({
-                error: `User with id = ${id} does not exists`
+                error: 'usuário não existe'
             })
         };
 
         return res.status(200).json(user);
     },
 
-    async store(req, res){
-        const { name, birth_date } = req.body;
+    async login(req,res){
+        const { login, password } = req.body;
 
-        const user = await User.create({ name, birth_date }).catch((e) => {
+        const user = await User.findAll({
+            where: { 
+                login: login,
+                password: password
+            }
+        }).catch((e) => {
+            return res.status(400).json({ error: "Failed with message: " + e });
+        });
+
+        if(!user || user.length < 1 ){
+            res.status(404).json({
+                error: 'usuário ou senha incorretos'
+            })
+        };
+
+        return res.status(200).json({
+            msg:'sucesso'
+        });
+    },
+
+    async store(req, res){
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+        const { login, password } = req.body;
+
+        const user = await User.create({ login, password }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
@@ -73,17 +111,27 @@ module.exports = {
     },
     
     async updateOne(req, res){
-        const id = req.params.id;
+        const { login, password, new_password } = req.body;
 
-        const user = await User.findByPk(id).catch((e) => {
+        const user = await User.findAll({
+            where: { 
+                login: login,
+                password: password
+            }
+        }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });
 
-        if(!user){
-            return res.status(404).json({ error: `User with id=${id} does not exists.` })
+        if(!user || user.length < 1 ){
+            res.status(404).json({
+                error: 'usuário ou senha incorretos'
+            })
         }else{
-            await User.update(req.body, {
-                where: { id: id }
+            await User.update({
+                login: login,
+                password: new_password
+            }, {
+                where: { login: login }
             })
             .then((num) => {
                 if (num == 1) {
