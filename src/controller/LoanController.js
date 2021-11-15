@@ -12,13 +12,34 @@ module.exports = {
         return res.status(200).json(loans);
     },
 
-    async indexByUserId(req,res){
-        const id = req.body.id;
+    async indexByUser(req,res){
+
+        const  {login}  = req.body;
+
+        const user = await User.findAll({
+            where: { 
+                login: login,
+            }
+        }).catch((e) => {
+            return res.status(400).json({ error: "Failed with message: " + e });
+        });
+
+        if(!user || user.length < 1 ){
+            res.status(404).json({
+                error: 'usuário não existe'
+            })
+        };
+
+        const id = user[0].id;
 
         const loans = await Loan.findAll({
             where: { 
                 user_id: id,
-            }
+            },
+            include : [
+                Book
+            ]
+            
         }).catch((e) => {
             return res.status(400).json({ error: "Failed with message: " + e });
         });

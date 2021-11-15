@@ -12,7 +12,7 @@ const routes = express.Router();
 
 routes.post('/loan', LoanController.store);
 routes.get('/loan', LoanController.index);
-routes.get('/loan/user', LoanController.indexByUserId);
+routes.post('/loan/user', LoanController.indexByUser);
 routes.get('/loan/:id', LoanController.indexOne);
 routes.delete('/loan/', LoanController.delete);
 routes.delete('/loan/:id', LoanController.deleteOne);
@@ -30,7 +30,7 @@ routes.put('/book/:id', BookController.updateOne);
 routes.post('/user', UserController.store);
 routes.post('/user/login', UserController.login);
 routes.get('/user', UserController.index);
-routes.get('/user/index-one', UserController.indexOne);
+routes.post('/user/index-one', UserController.indexOne);
 routes.delete('/user/', UserController.delete);
 routes.delete('/user/:id', UserController.deleteOne);
 routes.put('/user/', UserController.update);
@@ -45,6 +45,7 @@ routes.put('/author/', AuthorController.update);
 routes.put('/author/:id', AuthorController.updateOne);
 
 routes.post('/loan/:loan_id/loan_book/:id', LoanBookController.store);
+routes.post('/loan/items', LoanBookController.indexLoanItems);
 routes.get('/loan_book', LoanBookController.index);
 routes.get('/loan_book/:id', LoanBookController.indexOne);
 routes.delete('/loan_book/', LoanBookController.delete);

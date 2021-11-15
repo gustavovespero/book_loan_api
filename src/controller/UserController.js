@@ -18,7 +18,7 @@ module.exports = {
     },
 
     async indexOne(req,res){
-        const { login } = req.body;
+        const  {login}  = req.body;
 
         const user = await User.findAll({
             where: { 
